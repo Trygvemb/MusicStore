@@ -1,21 +1,26 @@
-@model IEnumerable<Artist>
+@model Album
 
 @{
-    ViewData["Title"] = "Artist Page";
+    ViewData["Title"] = "Atist Page";
 }
-
+<div class="d-flex justify-content-between align-items-center">
+<h1>@Model.Title</h1>
+<button type="button" class="btn btn-m btn-outline-secondary">Add Song</button>
+</div>
 <div class="album py-5 bg-light">
     <div class="container">
         <div class="row">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Songs!)
             {
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <div class="card-body">
                             <p class="card-text">@item.Name</p>
+                            @* <p class="card-text">@item.Genre.Name</p> *@
+
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a asp-controller="Artist" asp-action="Detail" asp-route-id="@item.ArtistId" class="btn btn-sm btn-outline-secondary">View</a>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                     <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                 </div>
                                 <small class="text-muted">9 mins</small>

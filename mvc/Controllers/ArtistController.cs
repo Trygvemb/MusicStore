@@ -4,23 +4,36 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using mvc.Data;
 
 namespace mvc.Controllers
 {
-    [Route("[controller]")]
     public class ArtistController : Controller
     {
-        private readonly ILogger<ArtistController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public ArtistController(ILogger<ArtistController> logger)
+        public ArtistController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
+        [Route("Artist")]
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var artists = _context.Artists.ToList();
+            return View(artists);
         }
+
+        [Route("Artist/Detail/{id}")]
+        public IActionResult Detail(int id)
+        {
+            var artist = _context.Artists.Include(a => a.Albums).FirstOrDefault(x => x.ArtistId == id);
+            return View(artist);
+        }
+
+        
     }
 }
