@@ -1,0 +1,45 @@
+@startuml class diagram
+
+class Artist {
+    + ArtistId: int
+    + Name: string
+    + Albums: ICollection<Album>
+    ' + Playlists: ICollection<Playlist>
+}
+class Album {
+    + AlbumId: int
+    + Name: string
+    + Title: string
+    + AlbumArtUrl: string
+    + Price: double
+    + ArtistId: int
+    + GenreId: int
+    + Songs: ICollection<Song>
+}
+class Genre {
+    + GenreId: int
+    + Name: string
+    + Description: string
+    + Albums: ICollection<Album>
+}
+class Song {
+    + SongId: int
+    + Name: string
+    + SongUrl: string
+    + AlbumId: int
+    + Playlists: ICollection<Playlist>
+    ' + ArtistId: int
+}
+class Playlist {
+    + PlaylistId: int
+    + Name: string
+    + Songs: ICollection<Song>
+}
+
+' Song "*" o--o "1" Artist
+Artist "1" o--o "*" Album
+Album "*" o--o "1" Genre
+Song "*" o--o "1" Album
+Song "*" o--o "*" Playlist
+
+@enduml
