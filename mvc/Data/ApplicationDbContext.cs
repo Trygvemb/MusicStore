@@ -22,21 +22,6 @@ namespace mvc.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // modelBuilder.Entity<Artist>()
-            // .HasMany(a => a.Albums)
-            // .WithOne(a => a.Artist)
-            // .HasForeignKey(a => a.AlbumId);
-
-            // modelBuilder.Entity<Album>()
-            // .HasMany(a => a.Songs)
-            // .WithOne(s => s.Album)
-            // .HasForeignKey(a => a.SongId);
-
-            // modelBuilder.Entity<Genre>()
-            // .HasMany(g => g.Albums)
-            // .WithOne(g => g.Genre)
-            // .HasForeignKey(a => a.AlbumId);
-
             modelBuilder.Entity<Song>()
             .HasMany(s => s.Playlists)
             .WithMany(p => p.Songs)
@@ -60,7 +45,7 @@ namespace mvc.Data
             .HasForeignKey(s => s.AlbumId)
             .OnDelete(DeleteBehavior.NoAction);
 
-
+            // Seeding Database
             modelBuilder.SeedData();
         }
     }
