@@ -60,6 +60,8 @@ namespace mvc.Data
             .HasForeignKey(s => s.AlbumId)
             .OnDelete(DeleteBehavior.NoAction);
 
+
+            modelBuilder.SeedData();
         }
     }
 }
