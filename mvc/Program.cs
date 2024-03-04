@@ -1,10 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using mvc.Data;
+using mvc.Interfaces;
+using mvc.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IAlbumRepository, AlbumRepository>();
+builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
+builder.Services.AddScoped<ISongRepository, SongRepository>();
+builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

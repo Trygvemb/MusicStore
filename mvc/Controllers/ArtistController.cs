@@ -7,30 +7,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using mvc.Data;
+using mvc.Interfaces;
 
 namespace mvc.Controllers
 {
     public class ArtistController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IArtistRepository _artistRepo;
 
-        public ArtistController(ApplicationDbContext context)
+        public ArtistController(IArtistRepository artistRepo)
         {
-            _context = context;
+            _artistRepo = artistRepo;
         }
 
         [Route("Artist")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var artists = _context.Artists.ToList();
+            var artists = await _artistRepo.GetAllAsync();
             return View(artists);
         }
 
         [Route("Artist/Detail/{id}")]
-        public IActionResult Detail(int id)
+        public async Task<IActionResult> Detail(int id)
         {
-            var artist = _context.Artists.Include(a => a.Albums).FirstOrDefault(x => x.ArtistId == id);
+            var artist = await _artistRepo.GetByIdAsync(id);
             return View(artist);
         }
 

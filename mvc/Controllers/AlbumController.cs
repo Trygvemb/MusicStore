@@ -7,30 +7,34 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using mvc.Data;
+using mvc.Interfaces;
+using mvc.Models;
+using mvc.Repository;
 
 namespace mvc.Controllers
 {
     public class AlbumController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        public IAlbumRepository _albumRepo { get; }
 
-        public AlbumController(ApplicationDbContext context)
+        public AlbumController(IAlbumRepository albumRepo)
         {
-            _context = context;
+            _albumRepo = albumRepo;
+            
         }
         
         [Route("Album")]
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var albums = _context.Albums.ToList();
+            IEnumerable<Album> albums = await _albumRepo.GetAllAsync();
             return View(albums);
         }
 
         [Route("Album/Detail/{id}")]
-        public IActionResult Detail(int id)
+        public async Task<IActionResult> Detail(int id)
         {
-            var album = _context.Albums.Include(a => a.Songs).FirstOrDefault(x => x.AlbumId == id);
+            var album = await _albumRepo.GetByIdAsync(id);
             return View(album);
         }
     }
