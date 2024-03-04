@@ -15,14 +15,14 @@ namespace mvc.Controllers
 {
     public class AlbumController : Controller
     {
-        public IAlbumRepository _albumRepo { get; }
+        private readonly IAlbumRepository _albumRepo;
 
         public AlbumController(IAlbumRepository albumRepo)
         {
             _albumRepo = albumRepo;
-            
+
         }
-        
+
         [Route("Album")]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -36,6 +36,18 @@ namespace mvc.Controllers
         {
             var album = await _albumRepo.GetByIdAsync(id);
             return View(album);
+        }
+
+        [Route("/Album/Create")]
+        [HttpPost]
+        public async Task<IActionResult> Create(Album album)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            await _albumRepo.AddAsync(album);
+            return RedirectToAction("Index");
         }
     }
 }

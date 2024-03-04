@@ -1,7 +1,29 @@
+@model IEnumerable<Song>
+
 @{
     ViewData["Title"] = "Song Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome To Song Page</h1>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-body">
+                            <p class="card-text">@item.Name</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a asp-controller="Song" asp-action="Detail" asp-route-id="@item.SongId" class="btn btn-sm btn-outline-secondary">View</a>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>
