@@ -2,36 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using mvc.Data;
 using mvc.Interfaces;
 using mvc.Models;
 
 namespace mvc.Repository
 {
-    public class ArtistRepository : IArtistRepository
+    public class ArtistRepository : GenericRepository<Artist>, IArtistRepository
     {
-        public Task AddAsync(Artist entity)
+        public ArtistRepository(ApplicationDbContext context) : base(context)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Artist>> GetAlAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Artist> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task RemoveAsync(Artist entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(Artist entity)
-        {
-            throw new NotImplementedException();
+            
         }
     }
 }

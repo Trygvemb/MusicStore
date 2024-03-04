@@ -21,7 +21,7 @@ namespace mvc.Controllers
 
         [Route("Artist")]
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var artists = _context.Artists.ToList();
             return View(artists);
