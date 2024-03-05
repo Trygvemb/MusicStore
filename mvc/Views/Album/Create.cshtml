@@ -1,7 +1,27 @@
-
+@model Album
 
 @{
-    ViewData["Title"] = "Atist Page";
+    ViewData["Title"] = "Create Album";
 }
 
-<h1>Welcome</h1>
+
+<form method="post" asp-action="Create">
+  <div class="form-group d-grid gap-3">
+    <input type="text" class="form-control" id="Title" name="Title" placeholder="Enter Album Title">
+    <span asp-validation-for="Title" class="text-danger"></span>
+    <input type="text" class="form-control" id="AlbumArtUrl" name="AlbumArtUrl" placeholder="Enter Album Art Url">
+    <span asp-validation-for="AlbumArtUrl" class="text-danger"></span>
+    <input type="number" class="form-control" id="Price" name="Price" placeholder="Enter Album Price">
+    <span asp-validation-for="Price" class="text-danger"></span>
+    <input type="number" class="form-control" id="GenreId" name="GenreId" placeholder="GenreId">
+    <span asp-validation-for="GenreId" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label for="Genre">Genre</label>
+    <select class="form-control" id="Genre" name="Genre">
+      <option value="Pop">Pop</option>
+      <option value="Rock">Rock</option>
+      </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

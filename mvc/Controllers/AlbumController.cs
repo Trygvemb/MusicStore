@@ -36,15 +36,28 @@ namespace mvc.Controllers
             return View(album);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(Album album)
+        [HttpGet]
+        public IActionResult Create()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(int id, Album album)
+        {
+            if(id == 0)
+            {
+                return RedirectToAction("Index", "Artist");
+            }
+
+            album.ArtistId = id;
+
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(album);
             }
             await _albumRepo.AddAsync(album);
-            return RedirectToAction("Index");
+            return RedirectToAction("Detail", new { id = album.AlbumId });
         }
     }
 }

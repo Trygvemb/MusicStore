@@ -1,13 +1,14 @@
 @model Song
 @{
-    ViewData["Title"] = "Song Page";
+    ViewData["Title"] = "Create Song";
 }
 
 <form method="post" asp-action="Create">
   <div class="form-group d-grid gap-3">
     <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter song Name">
+    <span asp-validation-for="Name" class="text-danger"></span>
     <input type="text" class="form-control" id="SongUrl" name="SongUrl" placeholder="Enter Song Url">
-    @* <input type="number" class="form-control" id="AlbumId" name="AlbumId" placeholder="Enter Album Id"> *@
+    <span asp-validation-for="SongUrl" class="text-danger"></span>
   </div>
   <div class="form-group">
     <label for="Genre">Genre</label>

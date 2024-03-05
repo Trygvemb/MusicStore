@@ -1,0 +1,21 @@
+
+@model Song
+
+<form method="post" asp-action="Edit">
+    <div class="form-group">
+        <label asp-for="SongId"></label>
+        <input type="hidden" disabled class="form-control" id="SongId" name="SongId" value="@Model.SongId">
+        <input type="hidden" disabled class="form-control" id="AlbumId" name="AlbumId" value="@Model.AlbumId">
+    </div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SongUrl"></label>
+        <input type="text" class="form-control" id="SongUrl" name="SongUrl" value="@Model.SongUrl">
+        <span asp-validation-for="SongUrl" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

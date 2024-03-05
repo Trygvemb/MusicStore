@@ -16,7 +16,7 @@ namespace mvc.Repository
         {
             _context = context;
         }
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
@@ -32,13 +32,13 @@ namespace mvc.Repository
             await _context.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             _context.Set<T>().Update(entity);
             _context.SaveChanges();
         }
 
-        public async Task RemoveAsync(T entity)
+        public virtual async Task RemoveAsync(T entity)
         {
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();

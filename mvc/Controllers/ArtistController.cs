@@ -20,7 +20,6 @@ namespace mvc.Controllers
             _artistRepo = artistRepo;
         }
 
-        [Route("Artist")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -28,7 +27,7 @@ namespace mvc.Controllers
             return View(artists);
         }
 
-        [Route("Artist/Detail/{id}")]
+        [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
             var artist = await _artistRepo.GetByIdAsync(id);
