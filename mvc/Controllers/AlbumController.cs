@@ -23,7 +23,6 @@ namespace mvc.Controllers
 
         }
 
-        [Route("Album")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -31,14 +30,12 @@ namespace mvc.Controllers
             return View(albums);
         }
 
-        [Route("Album/Detail/{id}")]
         public async Task<IActionResult> Detail(int id)
         {
             var album = await _albumRepo.GetByIdAsync(id);
             return View(album);
         }
 
-        [Route("/Album/Create")]
         [HttpPost]
         public async Task<IActionResult> Create(Album album)
         {

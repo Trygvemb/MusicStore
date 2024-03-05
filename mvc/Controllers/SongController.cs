@@ -19,7 +19,6 @@ namespace mvc.Controllers
             _songRepo = songRepo;
         }
 
-        [Route("/Song")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -27,27 +26,32 @@ namespace mvc.Controllers
             return View(songs);
         }
 
-        [Route("/Song/Detail/{id}")]
+        [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
             var song = await _songRepo.GetByIdAsync(id);
             return View(song);
         }
 
-        [Route("/Song/Create")]
         [HttpGet]
-        public async Task<IActionResult> Create(Song song)
+        public IActionResult Create()
         {
-            if (!ModelState.IsValid)
-            {
                 return View();
-            }
-            //await _songRepo.AddAsync(song);
-            //return RedirectToAction("Index");
-
-            return View();
         }   
 
+        
+        [HttpPost]
+        public async Task<IActionResult> Create(int id, Song song)
+        {
+            song.AlbumId = id;
+
+            if (!ModelState.IsValid)
+            {
+                return View(song);
+            }
+            await _songRepo.AddAsync(song);
+            return RedirectToAction("Detail", "Album", new { id = id });
+        }   
 
 
     }
