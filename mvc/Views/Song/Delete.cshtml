@@ -1,0 +1,26 @@
+@model Song
+
+<h1>Are you sure you want to Delete this song</h1>
+
+<form method="post" asp-action="Delete" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="hidden" disabled class="form-control" id="SongId" name="SongId" asp-for="SongId">
+        <input type="hidden" disabled class="form-control" id="AlbumId" name="AlbumId" value="@Model.AlbumId">
+    </div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SongUrl"></label>
+        <input type="text" class="form-control" id="SongUrl" name="SongUrl" value="@Model.SongUrl">
+        <span asp-validation-for="SongUrl" class="text-danger"></span>
+    </div>
+</form>
+
+<form asp-action="Delete" asp-route-id="@Model.SongId" method="post">
+    <input type="hidden" asp-for="SongId" />
+    <button type="submit" class="btn btn-danger float-right mt-3">Confirm</button>
+    <button type="button" class="btn btn-secondary float-right mt-3" onclick="window.location.href='@Url.Action("Detail", "Album", new { id = @Model.AlbumId })'">No</button>
+</form>

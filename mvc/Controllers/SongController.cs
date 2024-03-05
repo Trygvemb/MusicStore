@@ -88,68 +88,29 @@ namespace mvc.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var songDetails = await _songRepo.GetByIdAsync(id);
+            var song = await _songRepo.GetByIdAsync(id);
 
-            if (songDetails == null)
+            if (song == null)
             {
-                return View("Error");
+                return View("Error"); // Handle song not found
             }
 
-            return View(songDetails);
+            return View(song); // Show confirmation view with song details
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteSong(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var songDetails = await _songRepo.GetByIdAsync(id);
+            var song = await _songRepo.GetByIdAsync(id);
 
-            if (songDetails == null)
+            if (song == null)
             {
-                return View("Error");
+                return View("Error"); // Handle song not found
             }
 
-            _songRepo.RemoveAsync(songDetails);
-            return View("Index");
+            await _songRepo.RemoveAsync(song);
+            return RedirectToAction("Detail", "Album", new { id = song.AlbumId });
         }
 
-
-
-
-        // [HttpGet]
-        // public async Task<IActionResult> Edit(int id)
-        // {
-        //     var song = await _songRepo.GetByIdAsync(id);
-
-        //     if (song == null) return View("Error");
-
-        //     var songVM = new EditSongViewModel
-        //     {
-        //         SongId = song.SongId,
-        //         Name = song.Name,
-        //         SongUrl = song.SongUrl,
-        //         AlbumId = song.AlbumId
-        //     };
-
-        //     return View(songVM);
-        // }
-
-        // [HttpPost]
-        // public async Task<IActionResult> Edit(int id, EditSongViewModel songVM)
-        // {
-        //     if(!ModelState.IsValid)
-        //     {
-        //         ModelState.AddModelError("", "Failed to edit Song");
-        //         return View("Edit", songVM);
-        //     }
-        //     var song = new Song
-        //     {
-        //         SongId = id,
-        //         Name = songVM.Name,
-        //         SongUrl = songVM.SongUrl,
-        //         AlbumId = songVM.AlbumId
-        //     };
-        //     _songRepo.Update(song);
-        //     return RedirectToAction("Detail", new { id = song.SongId });
-        // }
     }
 }
