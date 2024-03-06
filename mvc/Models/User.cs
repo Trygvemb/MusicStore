@@ -9,5 +9,6 @@ namespace mvc.Models
     public class User : IdentityUser
     {
         public ICollection<Playlist>? MyProperty { get; set; }
+
     }
 }

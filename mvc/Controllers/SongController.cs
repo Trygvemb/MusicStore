@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using mvc.Interfaces;
 using mvc.Models;
-using mvc.ViewModel;
 
 namespace mvc.Controllers
 {
