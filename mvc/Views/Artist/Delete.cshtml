@@ -1,0 +1,19 @@
+@model Artist
+@{
+    ViewData["Title"] = "Delete Arist";
+}
+
+<h1>Are you sure you want to Delete this Artist</h1>
+<form method="post" asp-action="Delete" enctype="multipart/form-data">
+    <div class="form-group d-grid gap-3">
+        <input type="hidden" disabled class="form-control" id="ArtistId" name="SongId" value="@Model.ArtistId">
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+</form>
+
+<form asp-action="Delete" asp-route-id="@Model.ArtistId" method="post">
+    <input type="hidden" asp-for="ArtistId" />
+    <button type="submit" class="btn btn-danger float-right mt-3">Confirm</button>
+    <button type="button" class="btn btn-secondary float-right mt-3" onclick="window.location.href='@Url.Action("Index")'">No</button>
+</form>

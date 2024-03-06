@@ -1,0 +1,12 @@
+@model Artist
+@{
+    ViewData["Title"] = "Create Arist";
+}
+
+<form method="post" asp-action="Create">
+  <div class="form-group d-grid gap-3">
+    <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter Artist Name">
+    <span asp-validation-for="Name" class="text-danger"></span>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

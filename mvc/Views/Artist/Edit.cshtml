@@ -1,0 +1,13 @@
+@model Artist
+@{
+    ViewData["Title"] = "Edit Arist";
+}
+
+<form method="post" asp-action="Edit">
+    <div class="form-group d-grid gap-3">
+        <input type="hidden" disabled class="form-control" id="ArtistId" name="SongId" value="@Model.ArtistId">
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
