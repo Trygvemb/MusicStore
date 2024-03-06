@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using mvc.Data;
+using mvc.Areas.Identity.Data;
 using mvc.Interfaces;
 using mvc.Models;
 using mvc.Repository;

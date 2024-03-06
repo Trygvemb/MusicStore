@@ -2,7 +2,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using mvc.Models;
 
-namespace mvc.Data
+namespace mvc.Areas.Identity.Data
 {
     public static class ApplicationDbContextSeed
     {

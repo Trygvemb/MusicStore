@@ -11,8 +11,8 @@ using mvc.Areas.Identity.Data;
 namespace mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240304120839_SeedDataWithNames")]
-    partial class SeedDataWithNames
+    [Migration("20240306065712_CreateIdentitySchema")]
+    partial class CreateIdentitySchema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
